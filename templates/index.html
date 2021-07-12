@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <div class="container">
+        <br />
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <form class="card card-sm" method="post">
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <em class="fas fa-search h4 text-body"></em>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% if 'mail' in session %}
+            <div class="col-auto">
+                <a href="deconnexion"><button class="btn btn-primary">Déconnexion</button></a>
+            </div>
+            {% else %}
+            <div class="col-auto">
+                <a href="connexion"><button class="btn btn-primary">Connexion</button></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+{% endblock %}
