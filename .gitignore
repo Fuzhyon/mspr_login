@@ -140,3 +140,7 @@ mspr_login/Scripts/easy_install-3.8.exe
 mspr_login/Scripts/Activate.ps1
 mspr_login/Scripts/activate
 mspr_login/pyvenv.cfg
+.mspr_login/
+mspr_login/
+.mspr_login/*
+mspr_login/*
