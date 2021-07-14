@@ -128,5 +128,15 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#env chris 
-mspr_login/
+# env chris 
+mspr_login/Scripts/pythonw.exe
+mspr_login/Scripts/pythonw.exe
+mspr_login/Scripts/python.exe
+mspr_login/Scripts/pip3.exe
+mspr_login/Scripts/pip3.9.exe
+mspr_login/Scripts/pip.exe
+mspr_login/Scripts/easy_install.exe
+mspr_login/Scripts/easy_install-3.8.exe
+mspr_login/Scripts/Activate.ps1
+mspr_login/Scripts/activate
+mspr_login/pyvenv.cfg
