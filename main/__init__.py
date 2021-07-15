@@ -31,7 +31,7 @@ print(current_path)
 # -- ---------------------------------------------------------------------------------
 app = Flask(__name__,
             template_folder="D:\\Documents\\GitHub\\mspr_login\\template",
-            root_path="C:\\Users\\sasan\\PycharmProjects\\Flask-Ldap\\Flask-Ldap"
+            root_path="D:\\Documents\\GitHub\\mspr_login"
             )
 
 bootstrap = Bootstrap(app)

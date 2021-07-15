@@ -41,7 +41,7 @@ def global_ldap_authentication(user_name, user_pwd):
     ldap_user_name = user_name.strip()
     ldap_user_pwd = user_pwd.strip()
     tls_configuration = Tls(validate=ssl.CERT_REQUIRED, version=ssl.PROTOCOL_TLSv1_2)
-    server = Server('ldap://<server_name_here>:389', use_ssl=True, tls=tls_configuration)
+    server = Server('ldap://localhost:389', use_ssl=True, tls=tls_configuration)
     conn = Connection(server, user=ldap_user_name, password=ldap_user_pwd, authentication=NTLM,
                       auto_referrals=False)
     if not conn.bind():
