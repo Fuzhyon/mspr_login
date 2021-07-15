@@ -1,6 +1,4 @@
-from main import app
-from flask_wtf import Form
-from wtforms import StringField, PasswordField, validators
+from wtforms import StringField, PasswordField, validators, Form
 
 
 class LoginValidation(Form):
