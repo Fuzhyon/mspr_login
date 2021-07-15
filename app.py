@@ -6,9 +6,7 @@ from main import app
 from ldap3 import Server, Connection, ALL
 from forms.LoginForm import *
 
-app = Flask(__name__, template_folder='template')
-app.config["SECRET_KEY"] = "APP_SECRET_KEY"
-Bootstrap(app)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])

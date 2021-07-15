@@ -38,6 +38,8 @@ bootstrap = Bootstrap(app)
 app.config.from_object('settings')
 app.secret_key = os.urandom(24)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+app.config["SECRET_KEY"] = "APP_SECRET_KEY"
+Bootstrap(app)
 
 csrf = CSRFProtect(app)
 

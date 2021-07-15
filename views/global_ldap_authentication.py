@@ -13,8 +13,8 @@ def global_ldap_authentication_func(user_name, user_pwd):
     """
 
     # fetch the username and password
-    ldap_user_name = user_name.strip()
-    ldap_user_pwd = user_pwd.strip()
+    ldap_user_name = user_name#.strip()
+    ldap_user_pwd = user_pwd#.strip()
 
     # ldap server hostname and port
     ldsp_server = f"ldap://localhost:389"
