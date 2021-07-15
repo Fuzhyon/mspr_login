@@ -30,7 +30,7 @@ print(current_path)
 # -- Function    : Initiate the App C:\Users\p784138\AWS\Non-Prod\
 # -- ---------------------------------------------------------------------------------
 app = Flask(__name__,
-            template_folder="C:\\Users\\sasan\\PycharmProjects\\Flask-Ldap\\templates",
+            template_folder="D:\\Documents\\GitHub\\mspr_login\\template",
             root_path="C:\\Users\\sasan\\PycharmProjects\\Flask-Ldap\\Flask-Ldap"
             )
 
@@ -42,5 +42,3 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 csrf = CSRFProtect(app)
 
 print('Inside __init__py')
-
-from main import app
