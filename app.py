@@ -7,6 +7,7 @@ from forms.LoginForm import *
 from main import app
 from main import csrf
 
+
 def global_ldap_authentication_func(user_name, user_pwd):
     """
       Function: global_ldap_authentication
