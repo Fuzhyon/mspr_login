@@ -35,7 +35,7 @@
 
                                     <form method="POST" class="form-horizontal needs-validation"
                                           action="{{ url_for('index') }}">
-                                        {{ form.csrf_token }}
+                                       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                                         <div class="form-group row">
                                             <div class="col-sm-10">
                                                 {{ render_field(form.user_name_pid, class_="form-control", value="") }}

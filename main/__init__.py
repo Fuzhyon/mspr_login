@@ -29,9 +29,13 @@ print(current_path)
 # -- ---------------------------------------------------------------------------------
 # -- Function    : Initiate the App C:\Users\p784138\AWS\Non-Prod\
 # -- ---------------------------------------------------------------------------------
+
+root_dir = os.path.abspath('.')
+template_dir = root_dir + "/template"
+
 app = Flask(__name__,
-            template_folder="D:\\Documents\\GitHub\\mspr_login\\template",
-            root_path="D:\\Documents\\GitHub\\mspr_login"
+            template_folder=template_dir,
+            root_path=root_dir
             )
 
 bootstrap = Bootstrap(app)
@@ -39,7 +43,7 @@ app.config.from_object('settings')
 app.secret_key = os.urandom(24)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config["SECRET_KEY"] = "APP_SECRET_KEY"
-Bootstrap(app)
+# Bootstrap(app)
 
 csrf = CSRFProtect(app)
 
