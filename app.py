@@ -1,53 +1,56 @@
 import pyotp
 from flask import *
 from flask import render_template, request
-from ldap3 import Server, Connection, ALL
+from ldap3 import Server, Connection, ALL, Tls, NTLM
+import ssl
 
 from forms.LoginForm import *
 from main import app
 from main import csrf
 
 
+
+
 def global_ldap_authentication_func(user_name, user_pwd):
-    """
-      Function: global_ldap_authentication
-       Purpose: Make a connection to encrypted LDAP server.
-       :params: ** Mandatory Positional Parameters
-                1. user_name - LDAP user Name
-                2. user_pwd - LDAP User Password
-       :return: None
-    """
 
-    # fetch the username and password
-    ldap_user_name = user_name.strip()
-    ldap_user_pwd = user_pwd.strip()
-
-    # ldap server hostname and port
-    ldsp_server = f"ldap://localhost:389"
-
-    # dn
-    root_dn = "dc=example,dc=org"
-
+    ldsp_server = "192.168.1.150:389"
+    # ldap user and password
+    ldap_password = 'Fhfctk97450'
     # user
-    user = f'cn={ldap_user_name},{root_dn}'
+    admin = "Administrateur@local.chatelet.tk"
 
-    print(user)
-    server = Server(ldsp_server, get_info=ALL)
+    server_admin = Server(ldsp_server, get_info=ALL)
 
-    connection = Connection(server,
-                            user=user,
-                            password=ldap_user_pwd)
-    if not connection.bind():
-        print(f" *** Cannot bind to ldap server: {connection.last_error} ")
-        l_success_msg = f' ** Failed Authentication: {connection.last_error}'
+    connection_admin = Connection(server_admin, user=admin, password=ldap_password, auto_bind=True)
+    connection_admin.bind()
+
+    if connection_admin:
+
+
+        # fetch the username and password
+        ldap_user_name = user_name
+        ldap_user_pwd = user_pwd
+
+        # user
+        user = ldap_user_name+"@local.chatelet.tk"
+
+        tls_configuration = Tls(validate=ssl.CERT_REQUIRED, version=ssl.PROTOCOL_TLSv1_2)
+        server = Server('192.168.1.150', use_ssl=False, tls=tls_configuration)
+        con_user = Connection(server, user=user, password=ldap_user_pwd, auto_referrals=False)
+
+        if not con_user.bind():
+            print(f" *** Cannot bind to ldap server: {con_user.last_error} ")
+            l_success_msg = f' ** Failed Authentication: {con_user.last_error}'
+        else:
+            print(f" *** Successful bind to ldap server")
+            l_success_msg = 'Success'
+
+        return l_success_msg
     else:
-        print(f" *** Successful bind to ldap server")
-        l_success_msg = 'Success'
-
-    return l_success_msg
+        print(connection_admin)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login/', methods=['GET', 'POST'])
 def index():
     # initiate the form..
     form = LoginValidation(request.form)
