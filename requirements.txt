@@ -2,9 +2,9 @@
 ####### example-requirements.txt #######
 #
 ###### Requirements without Version Specifiers ######
-flask
-ldap3
-pyotp
+flask~=1.1.2
+ldap3~=2.9
+pyotp~=2.6.0
 flask-bootstrap
 Flask-WTF
 #
@@ -28,3 +28,4 @@ Flask-WTF
 # rejected
 # green
 #
+wtforms~=2.3.3

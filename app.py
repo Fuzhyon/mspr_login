@@ -6,7 +6,7 @@ from ldap3 import Server, Connection, ALL
 from forms.LoginForm import *
 from main import app
 from main import csrf
-
+from pwnedapi import Password
 
 def global_ldap_authentication_func(user_name, user_pwd):
     """
@@ -17,10 +17,13 @@ def global_ldap_authentication_func(user_name, user_pwd):
                 2. user_pwd - LDAP User Password
        :return: None
     """
+    passwd = Password(user_pwd)
 
     # fetch the username and password
     ldap_user_name = user_name.strip()
     ldap_user_pwd = user_pwd.strip()
+
+
 
     # ldap server hostname and port
     ldsp_server = f"ldap://localhost:389"
@@ -40,6 +43,9 @@ def global_ldap_authentication_func(user_name, user_pwd):
     if not connection.bind():
         print(f" *** Cannot bind to ldap server: {connection.last_error} ")
         l_success_msg = f' ** Failed Authentication: {connection.last_error}'
+    elif passwd.is_pwned():
+        print(f"Your password has been pwned {passwd.pwned_count} times.")
+        l_success_msg = 'badmdp'
     else:
         print(f" *** Successful bind to ldap server")
         l_success_msg = 'Success'
@@ -63,14 +69,19 @@ def index():
         if login_msg == "Success":
             success_message = f"*** Authentication Success "
             return redirect(url_for("login_2fa"))
-
+        elif login_msg == "badmdp":
+            return render_template("flash.html", error_message=str("Mauvais mot de passe"))
         else:
             error_message = f"*** Authentication Failed - {login_msg}"
             return render_template("error.html", error_message=str(error_message))
 
     return render_template('login.html', form=form)
 
-
+@app.route('/redirect', methods=['GET', 'POST'])
+@csrf.exempt
+def redirect_otp():
+    secret = pyotp.random_base32()
+    return render_template("includes/login_2fa.html", secret=secret)
 # 2FA page route
 @app.route("/login/2fa/")
 @csrf.exempt
